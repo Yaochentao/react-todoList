@@ -10,6 +10,7 @@ class TodoList extends Component {
 
     constructor(props) {
         super(props);
+        //当组件的state或者props发生改变的时候，render函数就会重新执行
         this.state = {
             inputValue: '',
             list: []
@@ -31,6 +32,7 @@ class TodoList extends Component {
                      className = 'input-1' //react中  元素类名class应写为className
                      value={this.state.inputValue}   
                      onChange={this.handleInputChange.bind(this)} //通过ES6中的bind()函数绑定了this,使handleInputChange中的this指向组件
+                     ref={(input) => {this.input = input}} //将this.input指向input,而input就指向ref绑定的dom元素.尽量少用ref这种写法
                      />
                     {/* <button onClick={this.handleBtnClick.bind(this)}>提交</button> */}
                     {/* 将bind(this)在组件初始化的时候就将this指向绑定好 */}
@@ -100,7 +102,8 @@ class TodoList extends Component {
         // this.setState({
         //     inputValue: e.target.value
         // })
-
+        
+        // console.log(this.input)
         const value = e.target.value;
         this.setState(() => {
             return {
